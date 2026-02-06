@@ -18,6 +18,10 @@ kaboom({
   crisp: true, // pixel look
 });
 
+  
+  add([text("GAME RUNNING", { size: 24 }), pos(20, 60), color(255, 255, 255)]);
+
+  
 // ---------- Sprite generator (no external images needed) ----------
 function spriteFromPixels(name, w, h, palette, rows, scale = 4) {
   // rows: array of strings length h, each char maps to palette key (or '.' for transparent)
@@ -160,12 +164,12 @@ scene("game", () => {
 
   // Player: Ethan
   const player = add([
-    sprite("ethan"),
-    pos(80, groundY() - 16*4),
-    area({ shape: new Rect(vec2(8, 8), 16*4 - 16, 16*4 - 8) }),
-    body(),
-    "player",
-  ]);
+  sprite("ethan"),
+  pos(80, groundY() - 16 * 4),
+  area({ offset: vec2(10, 10), width: 44, height: 52 }), // simple hitbox
+  body(),
+  "player",
+]);
 
   // HUD
   const label = add([
