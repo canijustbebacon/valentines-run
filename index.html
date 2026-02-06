@@ -194,13 +194,12 @@ scene("game", () => {
     const w = choose([18, 22, 26]);
     const x = width() + 40;
 
-    add([
+        add([
       rect(w, h),
       pos(x, groundY() - h),
       area(),
       body({ isStatic: true }),
       color(255, 90, 120),
-      outline(2, rgb(200, 50, 90)),
       move(LEFT, SPEED),
       offscreen({ destroy: true }),
       "obstacle",
