@@ -54,7 +54,7 @@ function spriteFromPixels(name, w, h, palette, rows, scale = 4) {
 
   ctx.putImageData(img, 0, 0);
   const url = c.toDataURL("image/png");
-  loadSprite(name, url, { sliceX: 1, sliceY: 1 });
+  return loadSprite(name, url, { sliceX: 1, sliceY: 1 });
 }
 
 // ---------- Pixel art sprites ----------
@@ -114,7 +114,7 @@ const celeste = [
   "..rsss....sss...",
   "..rssssssssss...",
   "..RRbbssssbbR...",
-  "...w wwhhww w...",
+  "...w.wwhhww w...",
   "...wwwwhhwwww...",
   "...wwwwwwwwww...",
   "...JJjjjjjjJJ...",
@@ -123,8 +123,12 @@ const celeste = [
   "....x......x....",
 ];
 
-spriteFromPixels("ethan", 16, 16, pal, ethan, 4);
-spriteFromPixels("celeste", 16, 16, pal, celeste, 4);
+const p1 = spriteFromPixels("ethan", 16, 16, pal, ethan, 4);
+const p2 = spriteFromPixels("celeste", 16, 16, pal, celeste, 4);
+
+Promise.all([p1, p2]).then(() => {
+  go("game");
+});
 
 // ---------- Game ----------
 const SPEED = 260;
@@ -289,7 +293,6 @@ scene("poster", () => {
   onTouchStart(() => go("game"));
 });
 
-go("game");
 </script>
 </body>
 </html>
