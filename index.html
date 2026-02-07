@@ -18,6 +18,11 @@ kaboom({
   crisp: true, // pixel look
 });
 
+  function responsiveSize(desktopSize) {
+  // 900 is your "desktop width" baseline
+  return Math.floor(desktopSize * Math.min(width() / 900, 1));
+}
+
                       // Show any crash on the canvas (super helpful on phones / Pages)
                       window.addEventListener("error", (e) => {
                         try {
@@ -272,9 +277,10 @@ scene("poster", () => {
 ]);
 
   add([
-    text("Ethan 💘\nWill you be my Valentine?", { size: 44, align: "center" }),
-    pos(width()/2, 120),
-    anchor("top"),
+    text("Ethan 💘\nWill you be my Valentine?", {
+    size: responsiveSize(44),
+    align: "center",
+    width: width() - 80, // prevents overflow
     color(60, 20, 40),
   ]);
 
@@ -288,12 +294,16 @@ scene("poster", () => {
   
 
   add([
-    text("Reply with:\n1) YES 😌\n2) ABSOLUTELY YES 😤\n\n(Press Space / Tap to replay)", { size: 26, align: "center" }),
-    pos(width()/2, 430),
-    anchor("top"),
+    text("Text me with:\n1) YES 😌\n2) ABSOLUTELY YES 😤\n\n(Press Space / Tap to replay)", 
+    { 
+    size: responsiveSize(26),
+    align: "center",
+    width: width() - 100,
+    }),         
     color(80, 40, 70),
   ]);
 
+  
   // Floating hearts
   for (let i = 0; i < 18; i++) {
     const heart = add([
