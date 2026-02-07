@@ -286,9 +286,6 @@ scene("poster", () => {
   anchor("top"),
 ]);
   
-celesteSprite.onUpdate(() => {
-  celesteSprite.pos.y += Math.sin(time() * 4) * 0.2;
-});
 
   add([
     text("Reply with:\n1) YES 😌\n2) ABSOLUTELY YES 😤\n\n(Press Space / Tap to replay)", { size: 26, align: "center" }),
