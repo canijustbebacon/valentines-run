@@ -263,6 +263,7 @@ scene("lose", (dist) => {
   onTouchStart(() => go("game"));
 });
 
+  //POSTER SCENE
 scene("poster", () => {
   add([
   rect(width() - 80, height() - 140),
@@ -288,7 +289,7 @@ scene("poster", () => {
   
 
   add([
-    text("Text me with:\n1) SI \n2) CLARO QUE SI, mwah\n\n(Press Space / Tap to replay)", { size: 26, align: "center" }),
+    text("Text me with:\n1) SII\n2) CLARO QUE SI MAMI, MWAHH\n\n(Press Space / Tap to replay)", { size: 26, align: "center" }),
     pos(width()/2, 430),
     anchor("top"),
     color(80, 40, 70),
@@ -307,12 +308,16 @@ scene("poster", () => {
       heart.pos.x += Math.sin(time() * rand(0.6, 1.2)) * dt() * 30;
       if (heart.pos.y < -40) heart.pos.y = height() + rand(20, 240);
     });
-  }
 
-  onKeyPress("space", () => go("game"));
-  onMousePress(() => go("game"));
-  onTouchStart(() => go("game"));
+  let canReplay = false;
+  wait(3, () => { 
+  canReplay = true; 
 });
+
+// only allow replay after unlocked
+onKeyPress("space", () => { if (canReplay) go("game"); });
+onMousePress(() => { if (canReplay) go("game"); });
+onTouchStart(() => { if (canReplay) go("game"); });
 
 </script>
 </body>
