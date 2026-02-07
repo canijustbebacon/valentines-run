@@ -236,7 +236,7 @@ scene("game", () => {
     if (finished) return;
 
     distance += dt() * (SPEED / 30);
-    label.text = `Jump: Space / Tap\nDistance: ${Math.floor(distance)}`;
+    label.text = `Keep running for a surprise!\nJump: Space / Tap\nDistance: ${Math.floor(distance)}`;
 
     if (distance >= target) {
       finished = true;
