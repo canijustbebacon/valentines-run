@@ -18,6 +18,29 @@ kaboom({
   crisp: true, // pixel look
 });
 
+                      // Show any crash on the canvas (super helpful on phones / Pages)
+                      window.addEventListener("error", (e) => {
+                        try {
+                          add([
+                            rect(width(), height()),
+                            pos(0, 0),
+                            color(0, 0, 0),
+                            opacity(0.85),
+                            fixed(),
+                          ]);
+                          add([
+                            text("ERROR:\n" + (e.message || e.error || "Unknown error"), { size: 16, width: width() - 40 }),
+                            pos(20, 20),
+                            color(255, 120, 120),
+                            fixed(),
+                          ]);
+                        } catch (_) {
+                          // if add() isn't available yet, at least log
+                        }
+                        console.error(e.error || e.message);
+                      });
+
+  
 // ---------- Sprite generator (no external images needed) ----------
 function spriteFromPixels(name, w, h, palette, rows, scale = 4) {
   // rows: array of strings length h, each char maps to palette key (or '.' for transparent)
