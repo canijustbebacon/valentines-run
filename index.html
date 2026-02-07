@@ -257,9 +257,12 @@ scene("game", () => {
 
 scene("lose", (dist) => {
   add([
-    text(`Oof! You bonked.\nDistance: ${dist}\n\nPress Space / Tap to retry`, { size: 28, align: "center" }),
-    pos(width() / 2, height() / 2 - 40),
-    anchor("center"),
+    text(`Oof! You bonked.\nDistance: ${dist}\n\nPress Space / Tap to retry`,
+         {      
+   size: responsiveSize(26),
+    align: "center",
+    width: width() - 100,
+         }),
     color(255, 220, 220),
   ]);
 
