@@ -263,34 +263,33 @@ scene("lose", (dist) => {
   onTouchStart(() => go("game"));
 });
 
-  //POSTER SCENE
+// POSTER SCENE
 scene("poster", () => {
   add([
-  rect(width() - 80, height() - 140),
-  pos(40, 70),
-  color(245, 240, 255),
-  outline(6, rgb(255, 140, 170)),
-]);
+    rect(width() - 80, height() - 140),
+    pos(40, 70),
+    color(245, 240, 255),
+    outline(6, rgb(255, 140, 170)),
+  ]);
 
   add([
     text("Ethan 💘\nWill you be my Valentine?", { size: 44, align: "center" }),
-    pos(width()/2, 120),
+    pos(width() / 2, 120),
     anchor("top"),
     color(60, 20, 40),
   ]);
 
-  // You at the end!
- add([
-  sprite("celeste"),
-  pos(width() / 2, 245),
-  scale(2), 
-  anchor("top"),
-]);
-  
+  // Celeste bigger
+  add([
+    sprite("celeste"),
+    pos(width() / 2, 245),
+    scale(2),
+    anchor("top"),
+  ]);
 
   add([
-    text("Text me with:\n1) SII\n2) CLARO QUE SI MAMI, MWAHH\n\n(Press Space / Tap to replay)", { size: 26, align: "center" }),
-    pos(width()/2, 430),
+    text("Text me with:\n1) SII\n2) CLARO QUE SI MAMI, MWAHH", { size: 26, align: "center" }),
+    pos(width() / 2, 430),
     anchor("top"),
     color(80, 40, 70),
   ]);
@@ -301,23 +300,30 @@ scene("poster", () => {
       text("❤", { size: rand(18, 36) }),
       pos(rand(0, width()), rand(height(), height() + 300)),
       color(255, 120, 160),
-      opacity(rand(0.4, 0.9)),
+      opacity(rand(0.75, 1)), // your nicer range
+      scale(rand(0.9, 1.2)),  // your nicer range
     ]);
+
+    const drift = rand(20, 60);
+    const wobble = rand(0.6, 1.2);
+
     heart.onUpdate(() => {
-      heart.pos.y -= dt() * rand(20, 60);
-      heart.pos.x += Math.sin(time() * rand(0.6, 1.2)) * dt() * 30;
+      heart.pos.y -= dt() * drift;
+      heart.pos.x += Math.sin(time() * wobble) * dt() * 30;
       if (heart.pos.y < -40) heart.pos.y = height() + rand(20, 240);
     });
+  }
+
 
   let canReplay = false;
-  wait(3, () => { 
-  canReplay = true; 
-});
+  wait(3, () => {
+    canReplay = true;
+  });
 
-// only allow replay after unlocked
-onKeyPress("space", () => { if (canReplay) go("game"); });
-onMousePress(() => { if (canReplay) go("game"); });
-onTouchStart(() => { if (canReplay) go("game"); });
+  onKeyPress("space", () => { if (canReplay) go("game"); });
+  onMousePress(() => { if (canReplay) go("game"); });
+  onTouchStart(() => { if (canReplay) go("game"); });
+});
 
 </script>
 </body>
